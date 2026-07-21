@@ -27,7 +27,7 @@ public class Produto  {
 
         private Integer estoque;
 
-        private Integer codigo_barra;
+        private String codigo_barra;
        
         @OneToMany(mappedBy = "produto") 
         private List<ItemVenda> itens;
