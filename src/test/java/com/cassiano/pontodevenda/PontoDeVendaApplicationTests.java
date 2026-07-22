@@ -1,4 +1,4 @@
-package com.cassiano.Ponto.de.Venda;
+package com.cassiano.pontodevenda;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

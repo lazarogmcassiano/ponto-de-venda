@@ -1,10 +1,5 @@
 package com.cassiano.pontodevenda.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class ItemVendaRequestDTO {
 
     private Long produtoId;
@@ -15,6 +10,26 @@ public class ItemVendaRequestDTO {
     }
 
     public ItemVendaRequestDTO(Long produtoId, Integer quantidade){
-        
+        this.produtoId = produtoId;
+        this.quantidade = quantidade;
+
     }
+
+    public Long getProdutoId() {
+        return produtoId;
+    }
+
+    public void setProdutoId(Long produtoId) {
+        this.produtoId = produtoId;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+
 }

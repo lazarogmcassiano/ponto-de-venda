@@ -12,11 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import lombok.*;
 
 @Entity
-@Getter
-@Setter
 public class Produto  {
 
         @Id
@@ -38,4 +35,63 @@ public class Produto  {
         @ManyToOne
         @JoinColumn(name = "categoria_id")
         private Categoria categoria;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getNome() {
+            return nome;
+        }
+
+        public void setNome(String nome) {
+            this.nome = nome;
+        }
+
+        public BigDecimal getPreco() {
+            return preco;
+        }
+
+        public void setPreco(BigDecimal preco) {
+            this.preco = preco;
+        }
+
+        public Integer getEstoque() {
+            return estoque;
+        }
+
+        public void setEstoque(Integer estoque) {
+            this.estoque = estoque;
+        }
+
+        public String getCodigo_barra() {
+            return codigo_barra;
+        }
+
+        public void setCodigo_barra(String codigo_barra) {
+            this.codigo_barra = codigo_barra;
+        }
+
+        public List<ItemVenda> getItens() {
+            return itens;
+        }
+
+        public void setItens(List<ItemVenda> itens) {
+            this.itens = itens;
+        }
+
+        public Categoria getCategoria() {
+            return categoria;
+        }
+
+        public void setCategoria(Categoria categoria) {
+            this.categoria = categoria;
+        }
+
+        
+
 }

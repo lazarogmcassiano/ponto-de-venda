@@ -1,10 +1,5 @@
 package com.cassiano.pontodevenda.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class CategoriaRequestDTO {
 
  private String nome;
@@ -15,5 +10,19 @@ public class CategoriaRequestDTO {
 
 
      public CategoriaRequestDTO(String nome){
+        this.nome = nome; 
      }
+
+
+     public String getNome() {
+         return nome;
+     }
+
+
+     public void setNome(String nome) {
+         this.nome = nome;
+     }
+
+
+
 }

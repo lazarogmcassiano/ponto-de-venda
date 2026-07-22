@@ -2,12 +2,24 @@ package com.cassiano.pontodevenda.dto;
 
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class VendaRequestDTO {
 
     private List<ItemVendaRequestDTO> itens;
+
+    public VendaRequestDTO(){
+    }
+
+    public VendaRequestDTO(List<VendaRequestDTO> itens) {
+
+    }
+
+    public List<ItemVendaRequestDTO> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemVendaRequestDTO> itens) {
+        this.itens = itens;
+    }
+
+
 }
