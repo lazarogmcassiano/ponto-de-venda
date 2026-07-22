@@ -18,7 +18,7 @@ public class Venda {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long IDENITY;
+    private Long id;
 
     private LocalDateTime data;
 
