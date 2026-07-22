@@ -26,8 +26,8 @@ public class Produto  {
 
         private Integer estoque;
 
-        @Column(unique = true)
-        private String codigo_barra;
+        @Column(name = "codigo_barra", unique = true)
+        private String codigoBarra;
        
         @OneToMany(mappedBy = "produto") 
         private List<ItemVenda> itens = new ArrayList<>();
@@ -68,12 +68,12 @@ public class Produto  {
             this.estoque = estoque;
         }
 
-        public String getCodigo_barra() {
-            return codigo_barra;
+        public String getCodigoBarra() {
+            return codigoBarra;
         }
 
-        public void setCodigo_barra(String codigo_barra) {
-            this.codigo_barra = codigo_barra;
+        public void setCodigoBarra(String codigoBarra) {
+            this.codigoBarra = codigoBarra;
         }
 
         public List<ItemVenda> getItens() {
@@ -92,6 +92,6 @@ public class Produto  {
             this.categoria = categoria;
         }
 
-        
+
 
 }

@@ -7,25 +7,25 @@ public class ProdutoRequestDTO {
     private String nome;
     private BigDecimal preco;
     private Integer estoque;
-    private String codigo_barra;
+    private String codigoBarra;
     private Integer categoriaId;
     private String categoriaCodigo;
 
     public ProdutoRequestDTO (){
     }
-     public ProdutoRequestDTO(String nome, BigDecimal preco, Integer estoque, String codigo_barra, Integer categoriaId){
+     public ProdutoRequestDTO(String nome, BigDecimal preco, Integer estoque, String codigoBarra, Integer categoriaId){
     this.nome = nome;
     this.preco = preco;
     this.estoque = estoque;
-    this.codigo_barra = codigo_barra;
+    this.codigoBarra = codigoBarra;
     this.categoriaId = categoriaId;
     }
 
-    public ProdutoRequestDTO(String nome, BigDecimal preco, Integer estoque, String codigo_barra, String categoriaCodigo){
+    public ProdutoRequestDTO(String nome, BigDecimal preco, Integer estoque, String codigoBarra, String categoriaCodigo){
     this.nome = nome;
     this.preco = preco;
     this.estoque = estoque;
-    this.codigo_barra = codigo_barra;
+    this.codigoBarra = codigoBarra;
     this.categoriaCodigo = categoriaCodigo;
     }
     public String getNome() {
@@ -46,11 +46,11 @@ public class ProdutoRequestDTO {
     public void setEstoque(Integer estoque) {
         this.estoque = estoque;
     }
-    public String getCodigo_barra() {
-        return codigo_barra;
+    public String getCodigoBarra() {
+        return codigoBarra;
     }
-    public void setCodigo_barra(String codigo_barra) {
-        this.codigo_barra = codigo_barra;
+    public void setCodigoBarra(String codigoBarra) {
+        this.codigoBarra = codigoBarra;
     }
     public Integer getCategoriaId() {
         return categoriaId;
@@ -66,5 +66,5 @@ public class ProdutoRequestDTO {
     }
 
 
-
 }
+

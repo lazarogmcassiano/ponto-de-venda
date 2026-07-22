@@ -31,7 +31,7 @@ public class ProdutoService {
         produto.setNome(dto.getNome());
         produto.setPreco(dto.getPreco());
         produto.setEstoque(dto.getEstoque());
-        produto.setCodigo_barra(dto.getCodigo_barra());
+        produto.setCodigoBarra(dto.getCodigoBarra());
 
         Categoria categoria;
 
@@ -59,7 +59,7 @@ public class ProdutoService {
     public List<Produto> listarTodos() {
         return produtoRepository.findAll();
     }
-
+    
     public ProdutoService() {
     }
 
@@ -76,7 +76,7 @@ public class ProdutoService {
         produto.setNome(dto.getNome());
         produto.setPreco(dto.getPreco());
         produto.setEstoque(dto.getEstoque());
-        produto.setCodigo_barra(dto.getCodigo_barra());
+        produto.setCodigoBarra(dto.getCodigoBarra());
 
         Categoria categoria;
 
@@ -111,6 +111,12 @@ public class ProdutoService {
         return produtoRepository.findByNome(nome)
                  .orElseThrow(() -> 
                          new RuntimeException("Produto não encontrado "));
+    }
+
+    public Produto buscarPorCodigo(String codigo) {
+        return produtoRepository.findByCodigoBarra(codigo)
+                 .orElseThrow(() -> 
+                         new RuntimeException("Codigo não encontrado "));
     }
 }
 

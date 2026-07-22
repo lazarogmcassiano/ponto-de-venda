@@ -8,7 +8,7 @@ public class ProdutoResponseDTO {
         private String nome;
         private BigDecimal preco;
         private Integer estoque;
-        private String codigo_barra;
+        private String codigoBarra;
         private String Categoria;
         
         
@@ -16,12 +16,12 @@ public class ProdutoResponseDTO {
 
      }
    
-    public ProdutoResponseDTO(Long id, String nome, BigDecimal preco, Integer estoque, String codigo_barra, String Categoria){
+    public ProdutoResponseDTO(Long id, String nome, BigDecimal preco, Integer estoque, String codigoBarra, String Categoria){
    this.id = id;
    this.nome = nome;
    this.estoque = estoque;
    this.preco = preco;
-   this.codigo_barra = codigo_barra;
+   this.codigoBarra = codigoBarra;
    this.Categoria = Categoria;
     }
 
@@ -57,12 +57,12 @@ public class ProdutoResponseDTO {
         this.estoque = estoque;
     }
 
-    public String getCodigo_barra() {
-        return codigo_barra;
+    public String getCodigoBarra() {
+        return codigoBarra;
     }
 
-    public void setCodigo_barra(String codigo_barra) {
-        this.codigo_barra = codigo_barra;
+    public void setCodigoBarra(String codigoBarra) {
+        this.codigoBarra = codigoBarra;
     }
 
     public String getCategoria() {
@@ -72,6 +72,5 @@ public class ProdutoResponseDTO {
     public void setCategoria(String categoria) {
         Categoria = categoria;
     }
-
 
 }

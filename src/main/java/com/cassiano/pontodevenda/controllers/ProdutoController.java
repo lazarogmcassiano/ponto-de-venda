@@ -43,6 +43,10 @@ public class ProdutoController {
     public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(produtoService.buscarPorId(id));
     }
+    @GetMapping("codigo/{codigo}")
+    public ResponseEntity<Produto> buscarPorCodigo(@PathVariable String codigo) {
+        return ResponseEntity.ok(produtoService.buscarPorCodigo(codigo));    
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Produto> atualizar(
