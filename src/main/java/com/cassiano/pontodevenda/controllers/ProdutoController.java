@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cassiano.pontodevenda.dto.ProdutoRequestDTO;
+import com.cassiano.pontodevenda.dto.ProdutoResponseDTO;
 import com.cassiano.pontodevenda.entities.Produto;
 import com.cassiano.pontodevenda.services.ProdutoService;
 
@@ -28,32 +29,33 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @PostMapping
-    public ResponseEntity<Produto> salvar(@RequestBody ProdutoRequestDTO dto) {
-        Produto produto = produtoService.salvar(dto);
+    public ResponseEntity<ProdutoResponseDTO> salvar(@RequestBody ProdutoRequestDTO dto) {
+        ProdutoResponseDTO produto = produtoService.salvar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(produto);
     }
 
-   @GetMapping
-   public ResponseEntity<List<Produto>> listarTodos() {
-   
-       return ResponseEntity.ok(produtoService.listarTodos());
-   }
+    @GetMapping
+    public ResponseEntity<List<ProdutoResponseDTO>> listarTodos() {
+
+        return ResponseEntity.ok(produtoService.listarTodos());
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(produtoService.buscarPorId(id));
     }
+
     @GetMapping("codigo/{codigo}")
-    public ResponseEntity<Produto> buscarPorCodigo(@PathVariable String codigo) {
-        return ResponseEntity.ok(produtoService.buscarPorCodigo(codigo));    
+    public ResponseEntity<ProdutoResponseDTO> buscarPorCodigo(@PathVariable String codigo) {
+        return ResponseEntity.ok(produtoService.buscarPorCodigo(codigo));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> atualizar(
+    public ResponseEntity<ProdutoResponseDTO> atualizar(
             @PathVariable Long id,
             @RequestBody ProdutoRequestDTO dto) {
 
-        Produto produto = produtoService.atualizar(id, dto);
+        ProdutoResponseDTO produto = produtoService.atualizar(id, dto);
         return ResponseEntity.ok(produto);
     }
 
@@ -63,4 +65,3 @@ public class ProdutoController {
         return ResponseEntity.noContent().build();
     }
 }
-

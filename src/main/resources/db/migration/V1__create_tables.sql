@@ -1,6 +1,6 @@
 CREATE TABLE categoria (
     id SERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
+    nome VARCHAR(255) UNIQUE NOT NULL,
     codigo VARCHAR(255) UNIQUE NOT NULL
 );
 

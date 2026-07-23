@@ -1,19 +1,16 @@
 package com.cassiano.pontodevenda.services;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cassiano.pontodevenda.dto.ProdutoRequestDTO;
-import com.cassiano.pontodevenda.entities.Categoria;
+import com.cassiano.pontodevenda.dto.request.ProdutoRequestDTO;
+import com.cassiano.pontodevenda.dto.response.ProdutoResponseDTO;
 import com.cassiano.pontodevenda.entities.Produto;
-import com.cassiano.pontodevenda.repositories.CategoriaRepository;
+import com.cassiano.pontodevenda.mappers.ProdutoMapper;
 import com.cassiano.pontodevenda.repositories.ProdutoRepository;
-
-
 
 @Service
 @Transactional
@@ -23,53 +20,36 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaService categoriaService;
 
-    public Produto salvar(ProdutoRequestDTO dto) {
+    @Autowired
+    private ProdutoMapper mapper;
 
-        Produto produto = new Produto();
-        produto.setNome(dto.getNome());
-        produto.setPreco(dto.getPreco());
-        produto.setEstoque(dto.getEstoque());
-        produto.setCodigoBarra(dto.getCodigoBarra());
+    public ProdutoResponseDTO salvar(ProdutoRequestDTO dto) {
 
-        Categoria categoria;
+        Produto produto = mapper.toEntity(dto);
 
-        if (dto.getCategoriaId() == null) {
+        produto.setCategoria(
+                categoriaService.BuscarPorId(dto.getCategoriaId()));
 
-            categoria = categoriaRepository
-                    .findByNome("Outros")
-                    .orElseThrow(() ->
-                            new RuntimeException("Categoria 'Outros' não encontrada"));
+        Produto salvo = produtoRepository.save(produto);
 
-        } else {
-
-            categoria = categoriaRepository
-                    .findById(dto.getCategoriaId())
-                    .orElseThrow(() ->
-                            new RuntimeException("Categoria não encontrada"));
-
-        }
-
-        produto.setCategoria(categoria);
-
-        return produtoRepository.save(produto);
+        return mapper.toResponse(salvo);
     }
 
-    public List<Produto> listarTodos() {
-        return produtoRepository.findAll();
-    }
-    
-    public ProdutoService() {
+    public List<ProdutoResponseDTO> listarTodos() {
+        return produtoRepository.findAll()
+                .stream()
+                .map(mapper::toResponse)
+                .toList();
     }
 
     public Produto buscarPorId(Long id) {
         return produtoRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 
-    public Produto atualizar(Long id, ProdutoRequestDTO dto) {
+    public ProdutoResponseDTO atualizar(Long id, ProdutoRequestDTO dto) {
 
         Produto produto = buscarPorId(id);
 
@@ -78,27 +58,13 @@ public class ProdutoService {
         produto.setEstoque(dto.getEstoque());
         produto.setCodigoBarra(dto.getCodigoBarra());
 
-        Categoria categoria;
+        produto.setCategoria(categoriaService.BuscarPorId(
+                dto.getCategoriaId()));
 
-        if (dto.getCategoriaId() == null) {
+        Produto atualizado = produtoRepository.save(produto);
 
-            categoria = categoriaRepository
-                    .findByNome("Outros")
-                    .orElseThrow(() ->
-                            new RuntimeException("Categoria 'Outros' não encontrada"));
-
-        } else {
-
-            categoria = categoriaRepository
-                    .findById(dto.getCategoriaId())
-                    .orElseThrow(() ->
-                            new RuntimeException("Categoria não encontrada"));
-        }
-
-        produto.setCategoria(categoria);
-
-        return produtoRepository.save(produto);
-    } 
+        return mapper.toResponse(atualizado);
+    }
 
     public void excluir(Long id) {
 
@@ -109,14 +75,14 @@ public class ProdutoService {
 
     public Produto buscarPorNome(String nome) {
         return produtoRepository.findByNome(nome)
-                 .orElseThrow(() -> 
-                         new RuntimeException("Produto não encontrado "));
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado "));
     }
 
-    public Produto buscarPorCodigo(String codigo) {
-        return produtoRepository.findByCodigoBarra(codigo)
-                 .orElseThrow(() -> 
-                         new RuntimeException("Codigo não encontrado "));
+    public ProdutoResponseDTO buscarPorCodigo(String codigo) {
+
+        Produto resposta = produtoRepository.findByCodigoBarra(codigo)
+                .orElseThrow(() -> new RuntimeException("Produto nao encontrado"));
+        return mapper.toResponse(resposta);
+
     }
 }
-

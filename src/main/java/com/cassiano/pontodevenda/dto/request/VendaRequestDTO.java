@@ -1,4 +1,4 @@
-package com.cassiano.pontodevenda.dto;
+package com.cassiano.pontodevenda.dto.request;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ public class VendaRequestDTO {
 
     private List<ItemVendaRequestDTO> itens;
 
-    public VendaRequestDTO(){
+    public VendaRequestDTO() {
     }
 
     public VendaRequestDTO(List<VendaRequestDTO> itens) {
@@ -20,6 +20,5 @@ public class VendaRequestDTO {
     public void setItens(List<ItemVendaRequestDTO> itens) {
         this.itens = itens;
     }
-
 
 }

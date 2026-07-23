@@ -1,3 +1,3 @@
-INSERT INTO categoria(nome, codigo)
-VALUES ('Outros', 'OUTROS');
+INSERT INTO categoria(id, nome, codigo)
+VALUES (101,'Outros', 'OUTROS');
 
