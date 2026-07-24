@@ -9,7 +9,7 @@ public class ProdutoRequestDTO {
     private Integer estoque;
     private String codigoBarra;
     private Integer categoriaId;
-    private String categoriaCodigo;
+    private String categoriaNome;
 
     public ProdutoRequestDTO() {
     }
@@ -23,12 +23,12 @@ public class ProdutoRequestDTO {
     }
 
     public ProdutoRequestDTO(String nome, BigDecimal preco, Integer estoque, String codigoBarra,
-            String categoriaCodigo) {
+            String categoriaNome) {
         this.nome = nome;
         this.preco = preco;
         this.estoque = estoque;
         this.codigoBarra = codigoBarra;
-        this.categoriaCodigo = categoriaCodigo;
+        this.categoriaNome = categoriaNome;
     }
 
     public String getNome() {
@@ -71,12 +71,12 @@ public class ProdutoRequestDTO {
         this.categoriaId = categoriaId;
     }
 
-    public String getCategoriaCodigo() {
-        return categoriaCodigo;
+    public String getCategoriaNome() {
+        return categoriaNome;
     }
 
-    public void setCategoriaCodigo(String categoriaCodigo) {
-        this.categoriaCodigo = categoriaCodigo;
+    public void setCategoriaNome(String categoriaNome) {
+        this.categoriaNome = categoriaNome;
     }
 
 }

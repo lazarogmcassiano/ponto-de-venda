@@ -9,19 +9,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.*;
 
 @Entity
 public class Venda {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDateTime data;
 
     private BigDecimal total;
- 
+
     @OneToMany(mappedBy = "venda")
     private List<ItemVenda> itens;
 
@@ -56,6 +55,5 @@ public class Venda {
     public void setItens(List<ItemVenda> itens) {
         this.itens = itens;
     }
-
 
 }

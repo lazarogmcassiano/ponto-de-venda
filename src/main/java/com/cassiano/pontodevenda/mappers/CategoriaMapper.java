@@ -1,9 +1,12 @@
 package com.cassiano.pontodevenda.mappers;
 
+import org.springframework.stereotype.Component;
+
 import com.cassiano.pontodevenda.dto.request.CategoriaRequestDTO;
 import com.cassiano.pontodevenda.dto.response.CategoriaResponseDTO;
 import com.cassiano.pontodevenda.entities.Categoria;
 
+@Component
 public class CategoriaMapper {
 
     public Categoria toEntity(CategoriaRequestDTO dto) {

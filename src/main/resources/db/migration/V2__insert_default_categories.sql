@@ -1,3 +1,3 @@
 INSERT INTO categoria(id, nome, codigo)
-VALUES (101,'Outros', 'OUTROS');
+VALUES (9999,'Outros', 'OUTROS');
 

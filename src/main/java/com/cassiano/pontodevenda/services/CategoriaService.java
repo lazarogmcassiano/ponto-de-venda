@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.cassiano.pontodevenda.dto.request.CategoriaRequestDTO;
 import com.cassiano.pontodevenda.dto.response.CategoriaResponseDTO;
 import com.cassiano.pontodevenda.entities.Categoria;
 import com.cassiano.pontodevenda.mappers.CategoriaMapper;
 import com.cassiano.pontodevenda.repositories.CategoriaRepository;
 
+@Transactional
 @Service
 public class CategoriaService {
 
@@ -19,12 +22,14 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public CategoriaResponseDTO salvar(String nome) {
+    public CategoriaResponseDTO salvar(CategoriaRequestDTO dto) {
 
-        Categoria categoria = categoriaRepository.findByNome(nome)
+        Categoria categoria = categoriaRepository.findByNome(dto.getNome())
                 .orElseGet(() -> {
+
                     Categoria nova = new Categoria();
-                    nova.setNome(nome);
+                    nova.setNome(dto.getNome());
+
                     return categoriaRepository.save(nova);
                 });
 
@@ -37,22 +42,29 @@ public class CategoriaService {
                 .stream()
                 .map(categoriaMapper::toResponse)
                 .toList();
-
     }
 
-    public Categoria BuscarPorId(Integer id) {
+    public Categoria buscarPorId(Integer id) {
+
         if (id == null) {
-            return categoriaRepository.findByNome("Outros")
-                    .orElseThrow(() -> new RuntimeException("Id categoria vazio, adicionou na padrao."));
+            return buscarCategoriaPadrao();
         }
+
         return categoriaRepository.findById(id)
-                .orElseGet(() -> categoriaRepository.findByNome("Outros")
-                        .orElseThrow(() -> new RuntimeException("Contate o suporte!")));
+                .orElseGet(this::buscarCategoriaPadrao);
+    }
+
+    private Categoria buscarCategoriaPadrao() {
+
+        return categoriaRepository.findByNome("Outros")
+                .orElseThrow(() -> new RuntimeException(
+                        "Categoria padrão 'Outros' não cadastrada."));
     }
 
     public Categoria buscarPorNome(String nome) {
 
         return categoriaRepository.findByNome(nome)
-                .orElseThrow(() -> new RuntimeException("Categoria nao encontrada"));
+                .orElseThrow(() -> new RuntimeException(
+                        "Categoria não encontrada."));
     }
 }

@@ -30,7 +30,7 @@ public class ProdutoService {
         Produto produto = mapper.toEntity(dto);
 
         produto.setCategoria(
-                categoriaService.BuscarPorId(dto.getCategoriaId()));
+                categoriaService.buscarPorId(dto.getCategoriaId()));
 
         Produto salvo = produtoRepository.save(produto);
 
@@ -58,7 +58,7 @@ public class ProdutoService {
         produto.setEstoque(dto.getEstoque());
         produto.setCodigoBarra(dto.getCodigoBarra());
 
-        produto.setCategoria(categoriaService.BuscarPorId(
+        produto.setCategoria(categoriaService.buscarPorId(
                 dto.getCategoriaId()));
 
         Produto atualizado = produtoRepository.save(produto);

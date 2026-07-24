@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cassiano.pontodevenda.dto.ProdutoRequestDTO;
-import com.cassiano.pontodevenda.dto.ProdutoResponseDTO;
+import com.cassiano.pontodevenda.dto.request.ProdutoRequestDTO;
+import com.cassiano.pontodevenda.dto.response.ProdutoResponseDTO;
 import com.cassiano.pontodevenda.entities.Produto;
 import com.cassiano.pontodevenda.services.ProdutoService;
 
