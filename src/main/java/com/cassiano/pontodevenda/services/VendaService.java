@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cassiano.pontodevenda.dto.request.ItemVendaRequestDTO;
 import com.cassiano.pontodevenda.dto.request.VendaRequestDTO;
+import com.cassiano.pontodevenda.dto.response.VendaResponseDTO;
 import com.cassiano.pontodevenda.entities.ItemVenda;
 import com.cassiano.pontodevenda.entities.Produto;
 import com.cassiano.pontodevenda.entities.Venda;
+import com.cassiano.pontodevenda.mappers.VendaMapper;
 import com.cassiano.pontodevenda.repositories.ProdutoRepository;
 import com.cassiano.pontodevenda.repositories.VendaRepository;
 
@@ -30,7 +32,10 @@ public class VendaService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public Venda realizarVenda(VendaRequestDTO vendaDTO) {
+    @Autowired
+    private VendaMapper vendaMapper;
+
+    public VendaResponseDTO realizarVenda(VendaRequestDTO vendaDTO) {
 
         Venda venda = new Venda();
         venda.setData(LocalDateTime.now());
@@ -70,7 +75,8 @@ public class VendaService {
 
         venda.setTotal(total);
 
-        return vendaRepository.save(venda);
+        vendaRepository.save(venda);
+        return vendaMapper.toResponse(venda);
     }
 
     public List<Venda> listarTodas() {

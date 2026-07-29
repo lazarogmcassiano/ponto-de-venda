@@ -2,8 +2,10 @@ package com.cassiano.pontodevenda.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,8 +23,8 @@ public class Venda {
 
     private BigDecimal total;
 
-    @OneToMany(mappedBy = "venda")
-    private List<ItemVenda> itens;
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemVenda> itens = new ArrayList<>();
 
     public Long getId() {
         return id;

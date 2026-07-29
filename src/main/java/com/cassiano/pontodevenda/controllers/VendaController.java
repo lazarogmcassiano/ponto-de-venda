@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cassiano.pontodevenda.dto.request.VendaRequestDTO;
+import com.cassiano.pontodevenda.dto.response.VendaResponseDTO;
 import com.cassiano.pontodevenda.entities.Venda;
 import com.cassiano.pontodevenda.services.VendaService;
 
@@ -28,9 +29,9 @@ public class VendaController {
     private VendaService vendaService;
 
     @PostMapping
-    public ResponseEntity<Venda> realizarVenda(@RequestBody VendaRequestDTO vendaDTO) {
+    public ResponseEntity<VendaResponseDTO> realizarVenda(@RequestBody VendaRequestDTO vendaDTO) {
 
-        Venda venda = vendaService.realizarVenda(vendaDTO);
+        VendaResponseDTO venda = vendaService.realizarVenda(vendaDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(venda);
     }
