@@ -19,11 +19,8 @@ import com.cassiano.pontodevenda.mappers.VendaMapper;
 import com.cassiano.pontodevenda.repositories.ProdutoRepository;
 import com.cassiano.pontodevenda.repositories.VendaRepository;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class VendaService {
 
     @Autowired
@@ -54,6 +51,7 @@ public class VendaService {
             }
 
             ItemVenda item = new ItemVenda();
+
             item.setVenda(venda);
             item.setProduto(produto);
             item.setQuantidade(itemDTO.getQuantidade());
@@ -68,38 +66,52 @@ public class VendaService {
 
             total = total.add(subtotal);
 
-            // Atualiza o estoque
-            produto.setEstoque(produto.getEstoque() - itemDTO.getQuantidade());
+            produto.setEstoque(
+                    produto.getEstoque() - itemDTO.getQuantidade());
+
             produtoRepository.save(produto);
         }
 
         venda.setTotal(total);
 
-        vendaRepository.save(venda);
-        return vendaMapper.toResponse(venda);
+        Venda vendaSalva = vendaRepository.save(venda);
+
+        return vendaMapper.toResponse(vendaSalva);
     }
 
-    public List<Venda> listarTodas() {
-        return vendaRepository.findAll();
+    public List<VendaResponseDTO> listarTodas() {
+
+        return vendaRepository.findAll()
+                .stream()
+                .map(vendaMapper::toResponse)
+                .toList();
     }
 
-    public Venda buscarPorId(Long id) {
+    public VendaResponseDTO buscarPorId(Long id) {
+
         return vendaRepository.findById(id)
+                .map(vendaMapper::toResponse)
                 .orElseThrow(() -> new RuntimeException("Venda não encontrada."));
     }
 
     public void excluir(Long id) {
-        Venda venda = buscarPorId(id);
+
+        Venda venda = vendaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venda não encontrada."));
+
         vendaRepository.delete(venda);
     }
 
-    public Venda atualizar(Long id, Venda vendaAtualizada) {
+    public VendaResponseDTO atualizar(Long id, Venda vendaAtualizada) {
 
-        Venda venda = buscarPorId(id);
+        Venda venda = vendaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venda não encontrada."));
 
         venda.setData(vendaAtualizada.getData());
         venda.setTotal(vendaAtualizada.getTotal());
 
-        return vendaRepository.save(venda);
+        Venda vendaSalva = vendaRepository.save(venda);
+
+        return vendaMapper.toResponse(vendaSalva);
     }
 }

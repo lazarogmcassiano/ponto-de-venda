@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cassiano.pontodevenda.dto.request.VendaRequestDTO;
 import com.cassiano.pontodevenda.dto.response.VendaResponseDTO;
-import com.cassiano.pontodevenda.entities.Venda;
 import com.cassiano.pontodevenda.services.VendaService;
 
 import lombok.RequiredArgsConstructor;
@@ -37,12 +36,12 @@ public class VendaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Venda>> listar() {
+    public ResponseEntity<List<VendaResponseDTO>> listar() {
         return ResponseEntity.ok(vendaService.listarTodas());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Venda> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<VendaResponseDTO> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(vendaService.buscarPorId(id));
     }
 
