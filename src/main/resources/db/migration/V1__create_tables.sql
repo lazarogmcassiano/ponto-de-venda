@@ -41,3 +41,4 @@ CREATE TABLE item_venda (
     REFERENCES produto(id)
 );
 
+

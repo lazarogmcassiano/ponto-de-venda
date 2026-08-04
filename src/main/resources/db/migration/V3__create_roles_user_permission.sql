@@ -94,7 +94,7 @@ CREATE TABLE user_permissions (
 
 );
 
-CREATE TABLE client (
+CREATE TABLE clients (
     id UUID PRIMARY KEY,
 
     name VARCHAR(70) NOT NULL,
