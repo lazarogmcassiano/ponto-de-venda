@@ -11,7 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Table(name = "sale_item")
+@Table(name = "sale_items")
 @Entity
 public class SaleItem {
 

@@ -1,44 +1,42 @@
-CREATE TABLE categoria (
+CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
-    nome VARCHAR(255) UNIQUE NOT NULL,
-    codigo VARCHAR(255)
+    name VARCHAR(255) UNIQUE NOT NULL,
+    code VARCHAR(255)
 );
 
-CREATE TABLE produto (
+CREATE TABLE products (
     id BIGSERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    preco NUMERIC(10,2) NOT NULL CHECK(preco >= 0),
-    estoque INTEGER NOT NULL,
-    codigo_barra VARCHAR(50) UNIQUE NOT NULL,
-    categoria_id INTEGER NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    price NUMERIC(10,2) NOT NULL CHECK(price >= 0),
+    inventory_quantity NUMERIC(10,3) NOT NULL CHECK(inventory_quantity >= 0),
+    barcode VARCHAR(50) UNIQUE NOT NULL,
+    category_id INTEGER NOT NULL,
 
-    CONSTRAINT fk_produto_categoria
-    FOREIGN KEY (categoria_id)
-    REFERENCES categoria(id)
+    CONSTRAINT fk_product_category
+    FOREIGN KEY (category_id)
+    REFERENCES categories(id)
 );
 
-CREATE TABLE venda (
-    id BIGSERIAL PRIMARY KEY,
-    data TIMESTAMP NOT NULL,
-    total NUMERIC(10,2) NOT NULL
+CREATE TABLE sales (
+    id UUID PRIMARY KEY,
+    date TIMESTAMP NOT NULL,
+    total NUMERIC(10,2) NOT NULL CHECK(total >= 0)
 );
 
-CREATE TABLE item_venda (
+CREATE TABLE sale_items (
     id BIGSERIAL PRIMARY KEY,
-    quantidade INTEGER NOT NULL,
-    preco_unitario NUMERIC(10,2) NOT NULL,
+    quantity NUMERIC(10,3) NOT NULL CHECK(quantity > 0),
+    unit_price NUMERIC(10,2) NOT NULL,
     subtotal NUMERIC(10,2) NOT NULL,
 
-    venda_id BIGINT NOT NULL,
-    produto_id BIGINT NOT NULL,
+    sale_id UUID NOT NULL,
+    product_id BIGINT NOT NULL,
 
-    CONSTRAINT fk_item_venda
-    FOREIGN KEY (venda_id)
-    REFERENCES venda(id),
+    CONSTRAINT fk_sale_item_sale
+    FOREIGN KEY (sale_id)
+    REFERENCES sales(id),
 
-    CONSTRAINT fk_item_produto
-    FOREIGN KEY (produto_id)
-    REFERENCES produto(id)
+    CONSTRAINT fk_sale_item_product
+    FOREIGN KEY (product_id)
+    REFERENCES products(id)
 );
-
-

@@ -20,7 +20,7 @@ public class Category {
     private String name;
 
     private String code;
-    @OneToMany(mappedBy = "code")
+    @OneToMany(mappedBy = "category")
     private List<Product> products;
 
     public Integer getId() {
